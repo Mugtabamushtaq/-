@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>تطبيق المحل</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1976d2">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" class="app">
+    <header class="app-header">
+      <h1 id="title">تطبيق المحل</h1>
+      <button id="btn-menu" class="icon-btn" title="القائمة">☰</button>
+    </header>
+
+    <nav id="nav" class="nav hidden">
+      <button data-route="products">المواد</button>
+      <button data-route="shops">المحلات</button>
+      <button data-route="invoices">الفواتير</button>
+      <button data-route="sync">المزامنة</button>
+      <button data-route="settings">الإعدادات</button>
+    </nav>
+
+    <main id="main" class="main">
+      <!-- dynamic content -->
+    </main>
+
+    <footer class="footer">
+      <div id="status">وضع: أوفلاين</div>
+      <div id="lastSync">آخر مزامنة: -</div>
+    </footer>
+  </div>
+
+  <template id="tpl-products">
+    <section class="page">
+      <h2>المواد</h2>
+      <div class="controls">
+        <input id="searchProduct" placeholder="ابحث عن مادة..." />
+        <button id="btnAddProduct">أضف مادة</button>
+      </div>
+      <ul id="productsList" class="list"></ul>
+    </section>
+  </template>
+
+  <template id="tpl-shops">
+    <section class="page">
+      <h2>المحلات</h2>
+      <div class="controls">
+        <input id="searchShop" placeholder="ابحث عن محل..." />
+        <button id="btnAddShop">أضف محل</button>
+      </div>
+      <ul id="shopsList" class="list"></ul>
+    </section>
+  </template>
+
+  <template id="tpl-invoices">
+    <section class="page">
+      <h2>الفواتير</h2>
+      <div class="controls">
+        <button id="btnNewInvoice">إنشاء فاتورة جديدة</button>
+      </div>
+      <ul id="invoicesList" class="list"></ul>
+    </section>
+  </template>
+
+  <template id="tpl-sync">
+    <section class="page">
+      <h2>المزامنة عبر GitHub Gist</h2>
+      <p>هنا تقدر ترفع البيانات (JSON) لمستودع Gist على GitHub وتشاركها مع أجهزة ثانية. تحتاج <strong>Personal Access Token</strong> بصلاحية <code>gist</code>.</p>
+      <div class="form">
+        <label>Token (PAT) الخاص بك</label>
+        <input id="inputToken" placeholder="ghp_xxx..." />
+        <label>Gist ID (لو لديك)</label>
+        <input id="inputGistId" placeholder="مثال: a1b2c3d4..." />
+        <div class="row">
+          <button id="btnCreateGist">انشاء/رفع (Upload)</button>
+          <button id="btnUpdateGist">تحديث Gist</button>
+          <button id="btnPullGist">سحب البيانات (Download)</button>
+        </div>
+        <div id="syncLog" class="log"></div>
+      </div>
+    </section>
+  </template>
+
+  <template id="tpl-settings">
+    <section class="page">
+      <h2>الإعدادات</h2>
+      <div>
+        <p>الوضع التلقائي للثيم: يعتمد على إعداد الجهاز.</p>
+        <button id="btnClearData">حذف كل البيانات المحلية</button>
+      </div>
+    </section>
+  </template>
+
+  <!-- invoice modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-body">
+      <button id="modalClose" class="icon-btn">✖</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
